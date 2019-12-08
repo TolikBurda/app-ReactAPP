@@ -30,13 +30,24 @@ class App extends Component {
 
   deleteTodo = () => {
     const filteredTodos = this.state.todos.filter( todo => {
-      return todo.id !== this.state.idTodo_ToDelete
+      return todo.id !== this.state.idTodo_ToDelete;
     });
     this.setState({
       todos: filteredTodos,
       confirmModalVisible: false,
       idTodo_ToDelete: null
     });
+  }
+
+  editTodo = (id, title) => {
+    const editedTodos = this.state.todos.filter( todo => {
+      if(todo.id === id){
+        todo.title = title;
+        return todo;
+      }
+      return todo;
+    });
+    this.setState({todos: editedTodos});
   }
 
   cancelDelete = () => { 
@@ -47,9 +58,9 @@ class App extends Component {
     const toggledTodos = this.state.todos.filter( todo => {
       if(todo.id === id){
         todo.completed = !todo.completed
-        return todo
+        return todo;
       }
-      return todo
+      return todo;
     });
     this.setState({todos: toggledTodos});
   }
@@ -69,6 +80,7 @@ class App extends Component {
           todos = { this.state.todos }
           handleDelete = { this.handleDelete }
           handleToggle = { this.handleToggle } 
+          editTodo = { this.editTodo }
           />
       </div>
       
